@@ -1,0 +1,59 @@
+project:
+  type: website
+  execute-dir: project
+
+website:
+  title: "BMM Parameter Recovery Reports"
+  back-to-top-navigation: true
+  page-navigation: true
+  repo-url: "https://github.com/venpopov/bmm-parameter-recovery"
+  repo-subdir: "reports"
+  navbar:
+    background: primary
+    search: true
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            href: "https://github.com/venpopov/bmm-parameter-recovery"
+          - text: Report a Bug
+            href: "https://github.com/venpopov/bmm-parameter-recovery/issues"
+    left:
+       - text: Functions
+         href: ../reference/index.html
+       - text: Articles
+         href: ../articles/index.html
+       - text: Changelog
+         href: ../news/index.html
+       - text: Develop
+         href: ../dev-notes/index.html
+       - text: Parameter recovery
+         href: ../parameter-recovery/index.html
+  sidebar:
+    collapse-level: 1
+    contents:
+      - auto: "reports/*"
+      
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    code-link: true
+    code-copy: true
+    code-tools: true
+    code-fold: true
+    code-overflow: wrap
+    page-layout: full
+
+execute: 
+  freeze: true
+
+knitr:
+  opts_chunk:
+    R.options:
+      width: 120
+
+
+
