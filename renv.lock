@@ -18,6 +18,17 @@
         "utils"
       ],
       "Hash": "397b7b2a265bc5a7a06852524dabae20"
+    },
+    "rprofile": {
+      "Package": "rprofile",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "utils"
+      ],
+      "Hash": "628f0ee5a444c06a7e8b9d84eec13669"
     }
   }
 }
