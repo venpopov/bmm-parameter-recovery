@@ -1,15 +1,15 @@
 library(targets)
 library(tarchetypes)
 tar_option_set(
-  packages = c("bmm", "dplyr", "purrr")
-  # controller = crew::crew_controller_local(workers = 10)
+  packages = c("bmm", "dplyr", "purrr"),
+  controller = crew::crew_controller_local(workers = 10)
 )
 
 # toy example
 pars <- expand.grid(
-  n = c(20, 50, 100, 200),
-  kappa = seq(1, 16, 1),
-  p_mem = seq(0.6, 1, 0.1)
+  n = c(20, 50, 100, 200, 500),
+  kappa = seq(1, 16, 0.5),
+  p_mem = seq(0.6, 1, 0.025)
 )
 
 transform_for_mixtur <- function(error) {
@@ -33,11 +33,11 @@ recover_mixture2p <- function(n, kappa, p_mem) {
 
 list(
   tar_map_rep(
-    name = results,
+    name = resultsmixturer2p_grid_results,
     command = recover_mixture2p(n, kappa, p_mem),
     values = pars,
     batches = 10,
-    reps = 3,
+    reps = 100,
     names = colnames(pars)
   )
 )
