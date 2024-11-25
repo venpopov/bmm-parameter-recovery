@@ -1,15 +1,19 @@
 library(targets)
 library(tarchetypes)
+library(crew)
+
+controller <- crew_controller_local(workers = 10)
+
 tar_option_set(
   packages = c("bmm", "dplyr", "purrr"),
-  controller = crew::crew_controller_local(workers = 10)
+  controller = controller
 )
 
 # toy example
 pars <- expand.grid(
-  n = c(20, 50, 100, 200, 500),
-  kappa = seq(1, 16, 0.5),
-  p_mem = seq(0.6, 1, 0.025)
+  n = c(20, 50, 100, 200),
+  kappa = seq(1, 16, 2),
+  p_mem = seq(0.6, 1, 0.1)
 )
 
 transform_for_mixtur <- function(error) {
