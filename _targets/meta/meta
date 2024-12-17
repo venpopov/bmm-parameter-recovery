@@ -1,0 +1,8 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+fit_mixtur_quiet|function|00a1d68562b5d91a
+generate_mixture2p_data|function|669d5aa5b77e5b62
+.Random.seed|object|6c9c21567d951b40
+get_parameter_grid|function|d0af58eb91c10ba2
+recover_mixture2p|function|a01bca98ef9425b5
+generating_parameters|stem|4f7e1d5b6c0fe7e9|a449e7720268b74f|bd6f54edc3cb945b|-2007635167||t20074.4538426079s|2893b55190f2662b|544|rds|local|group||generating_parameters_4f437757db868c40*generating_parameters_a82d2b8a6fc077d6*generating_parameters_b67280a40ebc38f1*generating_parameters_dda613ac2213cf97*generating_parameters_95cec16e9565d2e2*generating_parameters_eac2a112d3dced85*generating_parameters_5aac98e90c61cb61*generating_parameters_46ea917580731d6e*generating_parameters_d2b1a0289bc18bb3*generating_parameters_7a52b430187d4055|0.498||
+estimated_parameters_66808f8715d12123|branch||995bbf2a19045dd2|854167dfe8f96400|-1759088912||t20074.4538431666s||0|rds|local|vector|estimated_parameters||0.027||ℹ In index 1.Caused by error in .f unused arguments replication  .l4i, tar_group  .l5i

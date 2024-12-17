@@ -1,48 +1,44 @@
 library(targets)
 library(tarchetypes)
 library(crew)
-
-controller <- crew_controller_local(workers = 10)
+tar_source()
 
 tar_option_set(
   packages = c("bmm", "dplyr", "purrr"),
-  controller = controller
+  controller = crew_controller_local(workers = 10)
 )
 
-
-# toy example
-pars <- expand.grid(
-  n = c(20, 50, 100, 200, 500),
-  kappa = seq(1, 16, 1),
-  p_mem = seq(0.1, 1, 0.1)
-)
-
-transform_for_mixtur <- function(error) {
-  data.frame(
-    response = error,
-    target = 0,
-    id = 1
+get_parameter_grid <- function() {
+  expand.grid(
+    n = c(20, 50, 100),
+    kappa = seq(1, 16, 2),
+    p_mem = seq(0.1, 1, 0.3)
   )
 }
 
-recover_mixture2p <- function(n, kappa, p_mem) {
-  suppressMessages(
-    bmm::rmixture2p(n, kappa = kappa, p_mem = p_mem) |>
-      transform_for_mixtur() |>
-      mixtur::fit_mixtur(model = "2_component", unit = "radians") |>
-      select(kappa, p_t) |>
-      rename(kappa_est = kappa, p_mem_est = p_t) |>
-      mutate(n = n, kappa = kappa, p_mem = p_mem)
-  )
-}
+# list(
+#   tar_target(parameter_grid, get_parameter_grid()),
+#   tar_map_rep(
+#     name = resultsmixturer2p_grid_results,
+#     command = recover_mixture2p(n, kappa, p_mem),
+#     values = get_parameter_grid(),
+#     batches = 10,
+#     reps = 5,
+#     names = tidyselect::everything()
+#   )
+# )
 
 list(
-  tar_map_rep(
-    name = resultsmixturer2p_grid_results,
-    command = recover_mixture2p(n, kappa, p_mem),
-    values = pars,
-    batches = 10,
-    reps = 100,
-    names = colnames(pars)
+  tar_group_count(
+    name = generating_parameters,
+    count = 10,
+    command = get_parameter_grid()
+  ),
+  tar_target(
+    estimated_parameters,
+    purrr::pmap(generating_parameters, recover_mixture2p),
+    pattern = map(generating_parameters)
   )
 )
+
+purrr::map_dfr(seq_len(10), ~ get_parameter_grid())
