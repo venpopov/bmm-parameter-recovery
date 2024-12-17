@@ -11,9 +11,9 @@ tar_option_set(
 
 # toy example
 pars <- expand.grid(
-  n = c(20, 50, 100, 200),
-  kappa = seq(1, 16, 2),
-  p_mem = seq(0.6, 1, 0.1)
+  n = c(20, 50, 100, 200, 500),
+  kappa = seq(1, 16, 1),
+  p_mem = seq(0.1, 1, 0.1)
 )
 
 transform_for_mixtur <- function(error) {

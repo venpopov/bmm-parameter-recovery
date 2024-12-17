@@ -4,7 +4,8 @@ Sys.setenv(
 )
 
 if (requireNamespace("rprofile", quietly = TRUE)) {
-  rprofile::load(dev = quote(reload()))
+  rprofile::load()
 } else {
   source("renv/activate.R")
 }
+
