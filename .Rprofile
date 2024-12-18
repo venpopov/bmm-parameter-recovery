@@ -1,5 +1,7 @@
-## necessary for renv1.0.11 because of #2017 https://github.com/rstudio/renv/issues/2017
-Sys.setenv(RENV_EXT_ENABLED = FALSE)
+Sys.setenv(
+  RENV_EXT_ENABLED = FALSE, # necessary for renv1.0.11 because of #2017 https://github.com/rstudio/renv/issues/2017
+  RENV_CONFIG_SANDBOX_ENABLED = FALSE # recommended by `targets` manual for speeding up loading time 
+)
 
 source("renv/activate.R")
 if (Sys.info()["sysname"] == "Linux") {
