@@ -16,29 +16,29 @@ get_parameter_grid <- function() {
   )
 }
 
-# list(
-#   tar_target(parameter_grid, get_parameter_grid()),
-#   tar_map_rep(
-#     name = resultsmixturer2p_grid_results,
-#     command = recover_mixture2p(n, kappa, p_mem),
-#     values = get_parameter_grid(),
-#     batches = 10,
-#     reps = 5,
-#     names = tidyselect::everything()
-#   )
-# )
-
 list(
-  tar_group_count(
-    name = generating_parameters,
-    count = 10,
-    command = get_parameter_grid()
-  ),
-  tar_target(
-    estimated_parameters,
-    purrr::pmap(generating_parameters, recover_mixture2p),
-    pattern = map(generating_parameters)
+  tar_target(parameter_grid, get_parameter_grid()),
+  tar_map_rep(
+    name = resultsmixturer2p_grid_results,
+    command = recover_mixture2p(n, kappa, p_mem),
+    values = get_parameter_grid(),
+    batches = 10,
+    reps = 5,
+    names = tidyselect::everything()
   )
 )
 
-purrr::map_dfr(seq_len(10), ~ get_parameter_grid())
+# list(
+#   tar_group_count(
+#     name = generating_parameters,
+#     count = 10,
+#     command = get_parameter_grid()
+#   ),
+#   tar_target(
+#     estimated_parameters,
+#     purrr::pmap(generating_parameters, recover_mixture2p),
+#     pattern = map(generating_parameters)
+#   )
+# )
+# 
+# purrr::map_dfr(seq_len(10), ~ get_parameter_grid())
